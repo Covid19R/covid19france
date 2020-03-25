@@ -32,9 +32,14 @@ library(covid19france)
 ```
 
 ```{r}
-france_country
+tibble::tibble(france_country)
 ```
 
 ```{r}
-france_regional
+tibble::tibble(france_regional)
 ```
+
+```{r, warning=FALSE}
+refresh()
+```
+

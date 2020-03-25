@@ -9,6 +9,7 @@ raw_cols <-
     "reanimation",
     "hospitalises",
     "gueris",
+    "depistes",
     "source_nom",
     "source_url",
     "source_type"

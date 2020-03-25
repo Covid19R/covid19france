@@ -25,63 +25,48 @@ library(covid19france)
 ```
 
 ``` r
-france_country
-#>          date region_name region_code confirmed      dead      icu hospitalized
-#> 1  2020-03-24      France         FRA   22301.0 1100.0000 2516.000    10176.000
-#> 2  2020-03-23      France         FRA   19856.0  860.0000 2081.333     8674.333
-#> 3  2020-03-22      France         FRA   16689.0  660.0000 1722.000     7144.667
-#> 4  2020-03-21      France         FRA   14459.0  549.6667 1501.000     6081.333
-#> 5  2020-03-20      France         FRA   12612.0  450.0000 1297.000     5226.000
-#> 6  2020-03-19      France         FRA   10995.0  357.0000 1062.000     4267.000
-#> 7  2020-03-18      France         FRA    9134.0  242.0000  851.000     3299.000
-#> 8  2020-03-17      France         FRA    7730.0  175.0000  699.000     2579.000
-#> 9  2020-03-16      France         FRA    6633.0  148.0000       NA           NA
-#> 10 2020-03-15      France         FRA    5423.0  127.0000       NA      400.000
-#> 11 2020-03-14      France         FRA    4499.5   91.0000  300.000           NA
-#> 12 2020-03-13      France         FRA    3661.0   79.0000       NA           NA
-#>    recovered
-#> 1     3281.0
-#> 2     2567.0
-#> 3     2158.5
-#> 4     1811.0
-#> 5     1587.0
-#> 6     1240.0
-#> 7      908.0
-#> 8      602.0
-#> 9         NA
-#> 10        NA
-#> 11        NA
-#> 12        NA
-#>  [ reached 'max' / getOption("max.print") -- omitted 44 rows ]
+tibble::tibble(france_country)
+#> # A tibble: 56 x 1
+#>    france_country$… $region_name $region_code $confirmed $dead  $icu
+#>    <date>           <chr>        <chr>             <dbl> <dbl> <dbl>
+#>  1 2020-03-24       France       FRA               22301 1100  2516 
+#>  2 2020-03-23       France       FRA               19856  860  2081.
+#>  3 2020-03-22       France       FRA               16689  660  1722 
+#>  4 2020-03-21       France       FRA               14459  550. 1501 
+#>  5 2020-03-20       France       FRA               12612  450  1297 
+#>  6 2020-03-19       France       FRA               10995  357  1062 
+#>  7 2020-03-18       France       FRA                9134  242   851 
+#>  8 2020-03-17       France       FRA                7730  175   699 
+#>  9 2020-03-16       France       FRA                6633  148    NA 
+#> 10 2020-03-15       France       FRA                5423  127    NA 
+#> # … with 46 more rows, and 2 more variables: $hospitalized <dbl>,
+#> #   $recovered <dbl>
 ```
 
 ``` r
-france_regional
-#>          date   region_name region_code confirmed dead icu hospitalized
-#> 1  2020-03-24         Aisne      DEP-02       NaN   24  NA           NA
-#> 2  2020-03-24        Allier      DEP-03        34   NA  NA           NA
-#> 3  2020-03-24       Ardèche      DEP-07       125   NA  NA           NA
-#> 4  2020-03-24      Calvados      DEP-14       147   NA  NA           25
-#> 5  2020-03-24        Cantal      DEP-15        31   NA  NA           NA
-#> 6  2020-03-24          Cher      DEP-18        20    0  NA           NA
-#> 7  2020-03-24  Corse-du-Sud      DEP-2A       175   11   8           38
-#> 8  2020-03-24 Côtes-d'Armor      DEP-22        38   NA  NA           NA
-#> 9  2020-03-24         Drôme      DEP-26       113   NA  NA           NA
-#> 10 2020-03-24          Eure      DEP-27        71   NA  NA           15
-#> 11 2020-03-24  Eure-et-Loir      DEP-28        87    3  NA           NA
-#> 12 2020-03-24     Finistère      DEP-29       127   NA  NA           NA
-#>    recovered
-#> 1         NA
-#> 2         NA
-#> 3         NA
-#> 4         NA
-#> 5         NA
-#> 6         NA
-#> 7         NA
-#> 8         NA
-#> 9         NA
-#> 10        NA
-#> 11        NA
-#> 12        NA
-#>  [ reached 'max' / getOption("max.print") -- omitted 1793 rows ]
+tibble::tibble(france_regional)
+#> # A tibble: 1,805 x 1
+#>    france_regional… $region_name $region_code $confirmed $dead  $icu
+#>    <date>           <chr>        <chr>             <dbl> <dbl> <dbl>
+#>  1 2020-03-24       Aisne        DEP-02              NaN    24    NA
+#>  2 2020-03-24       Allier       DEP-03               34    NA    NA
+#>  3 2020-03-24       Ardèche      DEP-07              125    NA    NA
+#>  4 2020-03-24       Calvados     DEP-14              147    NA    NA
+#>  5 2020-03-24       Cantal       DEP-15               31    NA    NA
+#>  6 2020-03-24       Cher         DEP-18               20     0    NA
+#>  7 2020-03-24       Corse-du-Sud DEP-2A              175    11     8
+#>  8 2020-03-24       Côtes-d'Arm… DEP-22               38    NA    NA
+#>  9 2020-03-24       Drôme        DEP-26              113    NA    NA
+#> 10 2020-03-24       Eure         DEP-27               71    NA    NA
+#> # … with 1,795 more rows, and 2 more variables: $hospitalized <dbl>,
+#> #   $recovered <dbl>
+```
+
+``` r
+refresh()
+#> Downloading raw data from https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv.
+#> Saving clean data.
+#> ✔ Setting active project to '/Users/amanda/Desktop/Projects/covid19france'
+#> ✔ Saving 'france_country' to 'data/france_country.rda'
+#> ✔ Saving 'france_regional' to 'data/france_regional.rda'
 ```

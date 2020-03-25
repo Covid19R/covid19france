@@ -42,7 +42,7 @@ download_successful <- function(dte = todays_date) {
 read_data <- function() {
   if (!download_successful()) {
     message("Raw download from {url} was not successful.")
-    return(dplyr::tibble())
+    return(tibble::tibble())
   }
 
   raw <- readr::read_csv(
@@ -58,6 +58,7 @@ read_data <- function() {
         reanimation = readr::col_integer(),
         hospitalises = readr::col_integer(),
         gueris = readr::col_integer(),
+        depistes = readr::col_integer(),
         source_nom = readr::col_character(),
         source_url = readr::col_character(),
         source_type = readr::col_character()
@@ -77,6 +78,7 @@ clean_data <- function(tbl) {
       icu = reanimation,
       hospitalized = hospitalises,
       recovered = gueris,
+      discovered = depistes,
       source_url,
       source_type
     ) %>%
@@ -90,8 +92,14 @@ clean_data <- function(tbl) {
     )
 }
 
+round_mean <- function(...) {
+  mean(..., na.rm = TRUE) %>%
+    round() %>%
+    as.integer()
+}
+
 average_data <- function(tbl) {
-  tbl %<>%
+  tbl %>%
     dplyr::group_by(
       date,
       region_name,
@@ -99,22 +107,12 @@ average_data <- function(tbl) {
     ) %>%
     dplyr::summarise_if(
       is.numeric,
-      mean,
-      na.rm = TRUE
+      round_mean
     ) %>%
     dplyr::ungroup() %>%
     dplyr::arrange(
       desc(date),
       region_name
-    ) %>%
-    # Replace NaNs with NA
-    tidyr::replace_na(
-      list(
-        dead = NA,
-        icu = NA,
-        hospitalized = NA,
-        recovered = NA
-      )
     )
 }
 
