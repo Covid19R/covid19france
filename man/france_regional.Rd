@@ -14,7 +14,8 @@ A data frame with one row per date and 8 variables:
   \item{dead}{Number of cumulative dead cases on this day.}
   \item{icu}{Number of cumulative icu cases on this day.}
   \item{hospitalized}{Number of cumulative hospitalized cases on this day.}
-  \item{recovered}{Number of cumulative dead recovered on this day.}
+  \item{recovered}{Number of cumulative recovered cases on this day.}
+  \item{discovered}{Number of cumulative discovered cases on this day.}
 }
 }
 \source{
