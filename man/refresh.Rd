@@ -16,5 +16,7 @@ Update the raw and cleaned country and regional CSVs of data in \code{data-raw}.
 Refresh raw and cleaned data
 }
 \examples{
+\dontrun{
 refresh()
+}
 }

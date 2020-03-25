@@ -15,6 +15,10 @@ create_path <- function(dte = todays_date,
 download_path <- create_path()
 
 download_data <- function(verbose = FALSE) {
+  if (!fs::dir_exists(download_dir)) {
+    fs::dir_create(download_dir)
+  }
+
   download.file(url, download_path, quiet = !verbose)
 }
 
