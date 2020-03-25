@@ -1,0 +1,20 @@
+
+globalVariables(
+  c(
+    "cas_confirmes",
+    "deces",
+    "desc",
+    "granularite",
+    "gueris",
+    "hospitalises",
+    "maille_code",
+    "maille_nom",
+    "mutate_if",
+    "reanimation",
+    "region_code",
+    "region_name",
+    "region_type",
+    "source_type",
+    "source_url"
+  )
+)

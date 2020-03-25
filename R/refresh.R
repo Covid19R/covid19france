@@ -6,12 +6,16 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' refresh()
+#' }
 refresh <- function(verbose = TRUE) {
   message(glue::glue("Downloading raw data from {url}."))
   download_data(verbose = FALSE)
 
-  clean <- clean_data()
+  clean <-
+    read_data() %>%
+    clean_data()
 
   message("Saving clean data.")
   save_country(clean)

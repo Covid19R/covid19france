@@ -1,5 +1,4 @@
-#' @import dplyr
-#' @import readr
+#' @importFrom utils download.file
 
 url <- "https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv"
 
@@ -8,9 +7,9 @@ todays_date <- lubridate::today()
 download_dir <- here::here("data-raw")
 
 create_path <- function(dte = todays_date,
-                                 type = "raw",
-                                 suffix = "") {
-  glue::glue("{download_dir}/{dte}_france_{type}_{suffix}.csv")
+                        type = "raw",
+                        suffix = "") {
+  glue::glue("{download_dir}/{dte}_france_{type}{suffix}.csv")
 }
 
 download_path <- create_path()
@@ -36,32 +35,35 @@ download_successful <- function(dte = todays_date) {
   if (todays_date %in% existing_dates) TRUE else FALSE
 }
 
-clean_data <- function() {
-  if (! download_successful()) {
-    return(tibble())
+read_data <- function() {
+  if (!download_successful()) {
+    message("Raw download from {url} was not successful.")
+    return(dplyr::tibble())
   }
 
-  raw <- read_csv(
+  raw <- readr::read_csv(
     download_path,
     col_types =
-      cols(
-        date = col_date(format = ""),
-        granularite = col_character(),
-        maille_code = col_character(),
-        maille_nom = col_character(),
-        cas_confirmes = col_double(),
-        deces = col_double(),
-        reanimation = col_double(),
-        hospitalises = col_double(),
-        gueris = col_double(),
-        source_nom = col_character(),
-        source_url = col_character(),
-        source_type = col_character()
+      readr::cols(
+        date = readr::col_date(format = ""),
+        granularite = readr::col_character(),
+        maille_code = readr::col_character(),
+        maille_nom = readr::col_character(),
+        cas_confirmes = readr::col_integer(),
+        deces = readr::col_integer(),
+        reanimation = readr::col_integer(),
+        hospitalises = readr::col_integer(),
+        gueris = readr::col_integer(),
+        source_nom = readr::col_character(),
+        source_url = readr::col_character(),
+        source_type = readr::col_character()
       )
   )
+}
 
-  raw %>%
-    select(
+clean_data <- function(tbl) {
+  tbl %>%
+    dplyr::select(
       date,
       region_type = granularite,
       region_name = maille_nom,
@@ -74,68 +76,86 @@ clean_data <- function() {
       source_url,
       source_type
     ) %>%
-    arrange(
+    dplyr::arrange(
       desc(date),
       region_name
+    ) %>%
+    dplyr::mutate_if(
+      is.character,
+      stringr::str_squish
     )
 }
 
 average_data <- function(tbl) {
-  tbl %>%
-    group_by(
+  tbl %<>%
+    dplyr::group_by(
       date,
       region_name,
       region_code
     ) %>%
-    summarise_if(
+    dplyr::summarise_if(
       is.numeric,
-      mean, na.rm = TRUE
+      mean,
+      na.rm = TRUE
     ) %>%
-    ungroup()
+    dplyr::ungroup() %>%
+    dplyr::arrange(
+      desc(date),
+      region_name
+    ) %>%
+    # Replace NaNs with NA
+    tidyr::replace_na(
+      list(
+        dead = NA,
+        icu = NA,
+        hospitalized = NA,
+        recovered = NA
+      )
+    )
 }
 
 save_country <- function(tbl) {
   france_country_all_sources <-
     tbl %>%
-    filter(region_type == "pays") %>%
-    select(-region_type)
+    dplyr::filter(region_type == "pays") %>%
+    dplyr::select(-region_type)
 
-  write_csv(
+  readr::write_csv(
     france_country_all_sources,
-    create_path(type = "clean", suffix = "country_all_sources")
+    create_path(type = "clean", suffix = "_country_all_sources")
   )
 
   france_country <-
     france_country_all_sources %>%
     average_data()
 
-  write_csv(
+  readr::write_csv(
     france_country,
-    create_path(type = "clean", suffix = "country")
+    create_path(type = "clean", suffix = "_country")
   )
 
-  usethis::use_data(france_country)
+  usethis::use_data(france_country, overwrite = TRUE)
 }
 
 save_regional <- function(tbl) {
   france_regional_all_sources <-
     tbl %>%
-    filter(region_type == "departement") %>%
-    select(-region_type)
+    dplyr::filter(region_type == "departement") %>%
+    dplyr::select(-region_type)
 
-  write_csv(
+  readr::write_csv(
     france_regional_all_sources,
-    create_path(type = "clean", suffix = "regional_all_sources")
+    create_path(type = "clean", suffix = "_regional_all_sources")
   )
 
   france_regional <-
     france_regional_all_sources %>%
     average_data()
 
-  write_csv(
+  readr::write_csv(
     france_regional,
-    create_path(type = "clean", suffix = "regional")
+    create_path(type = "clean", suffix = "_regional")
   )
 
-  usethis::use_data(france_regional)
+  usethis::use_data(france_regional, overwrite = TRUE)
 }

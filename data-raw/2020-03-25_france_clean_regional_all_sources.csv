@@ -1,4 +1,5 @@
 date,region_name,region_code,confirmed,dead,icu,hospitalized,recovered,source_url,source_type
+2020-03-24,Aisne,DEP-02,NA,24,NA,NA,NA,https://www.hauts-de-france.ars.sante.fr/system/files/2020-03/Point%20quotidien%20cas%20confirm%C3%A9s%20-%2024032020.pdf,agences-regionales-sante
 2020-03-24,Allier,DEP-03,34,NA,NA,NA,NA,https://www.auvergne-rhone-alpes.ars.sante.fr/covid-19-en-auvergne-rhone-alpes-point-de-situation-mardi-24-mars,agences-regionales-sante
 2020-03-24,Ardèche,DEP-07,125,NA,NA,NA,NA,https://www.auvergne-rhone-alpes.ars.sante.fr/covid-19-en-auvergne-rhone-alpes-point-de-situation-mardi-24-mars,agences-regionales-sante
 2020-03-24,Calvados,DEP-14,147,NA,NA,25,NA,https://www.normandie.ars.sante.fr/system/files/2020-03/20200324_CP-point-situation-normandie_0.pdf,agences-regionales-sante
@@ -25,9 +26,13 @@ date,region_name,region_code,confirmed,dead,icu,hospitalized,recovered,source_ur
 2020-03-24,Manche,DEP-50,107,NA,NA,15,NA,https://www.normandie.ars.sante.fr/system/files/2020-03/20200324_CP-point-situation-normandie_0.pdf,agences-regionales-sante
 2020-03-24,Mayotte,DEP-976,30,NA,NA,NA,NA,http://www.mayotte.ars.sante.fr/system/files/2020-03/CP%2024%20mars%20COVID-19.pdf,agences-regionales-sante
 2020-03-24,Morbihan,DEP-56,185,NA,NA,NA,NA,https://www.bretagne.ars.sante.fr/system/files/2020-03/CP%20Coronavirus_Bretagne_point%20de%20situation%2017h30_200324.pdf,agences-regionales-sante
+2020-03-24,Nord,DEP-59,NA,8,NA,NA,NA,https://www.hauts-de-france.ars.sante.fr/system/files/2020-03/Point%20quotidien%20cas%20confirm%C3%A9s%20-%2024032020.pdf,agences-regionales-sante
+2020-03-24,Oise,DEP-60,NA,61,NA,NA,NA,https://www.hauts-de-france.ars.sante.fr/system/files/2020-03/Point%20quotidien%20cas%20confirm%C3%A9s%20-%2024032020.pdf,agences-regionales-sante
 2020-03-24,Orne,DEP-61,28,NA,NA,9,NA,https://www.normandie.ars.sante.fr/system/files/2020-03/20200324_CP-point-situation-normandie_0.pdf,agences-regionales-sante
+2020-03-24,Pas-de-Calais,DEP-62,NA,3,NA,NA,NA,https://www.hauts-de-france.ars.sante.fr/system/files/2020-03/Point%20quotidien%20cas%20confirm%C3%A9s%20-%2024032020.pdf,agences-regionales-sante
 2020-03-24,Puy-de-Dôme,DEP-63,81,NA,NA,NA,NA,https://www.auvergne-rhone-alpes.ars.sante.fr/covid-19-en-auvergne-rhone-alpes-point-de-situation-mardi-24-mars,agences-regionales-sante
 2020-03-24,Seine-Maritime,DEP-76,233,NA,NA,97,NA,https://www.normandie.ars.sante.fr/system/files/2020-03/20200324_CP-point-situation-normandie_0.pdf,agences-regionales-sante
+2020-03-24,Somme,DEP-80,NA,27,NA,NA,NA,https://www.hauts-de-france.ars.sante.fr/system/files/2020-03/Point%20quotidien%20cas%20confirm%C3%A9s%20-%2024032020.pdf,agences-regionales-sante
 2020-03-23,Ain,DEP-01,116,5,NA,NA,NA,https://www.auvergne-rhone-alpes.ars.sante.fr/covid-19-en-auvergne-rhone-alpes-point-de-situation-lundi-23-mars-2020,agences-regionales-sante
 2020-03-23,Ain,DEP-01,NA,0,3,17,7,NA,sante-publique-france-data
 2020-03-23,Aisne,DEP-02,NA,22,NA,NA,NA,https://www.hauts-de-france.ars.sante.fr/system/files/2020-03/Point%20quotidien%20cas%20confirm%C3%A9s%20-%2023032020_0.pdf,agences-regionales-sante
