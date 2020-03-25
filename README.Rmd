@@ -15,9 +15,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/Covid19R/covid19france.svg?branch=master)](https://travis-ci.org/Covid19R/covid19france)
-[![CRAN status](https://www.r-pkg.org/badges/version/covid19us)](https://CRAN.R-project.org/package=covid19us)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CRAN status](https://www.r-pkg.org/badges/version/covid19france)](https://CRAN.R-project.org/package=covid19france)
 <!-- badges: end -->
+
+This package contains summary datasets of COVID-19 cases in France, averaged from the [opencovid19-fr](https://github.com/opencovid19-fr/data) data, available on GitHub. (README in English available [here](https://github.com/opencovid19-fr/data/blob/master/README.en.md).)
 
 ## Installation
 
@@ -25,21 +27,33 @@ knitr::opts_chunk$set(
 # install.packages("devtools")
 devtools::install_github("Covid19R/covid19france")
 ```
-## Example
+## Data
 
 ```{r example}
 library(covid19france)
 ```
 
+The two package datasets are available once the package is attached.
+
 ```{r}
-tibble::tibble(france_country)
+tibble::as_tibble(france_country)
 ```
 
 ```{r}
-tibble::tibble(france_regional)
+tibble::as_tibble(france_regional)
 ```
+
+If you want to update the datasets, run `refresh`.
 
 ```{r, warning=FALSE}
 refresh()
 ```
 
+
+## Contributing
+
+Please submit [issues](https://github.com/Covid19R/covid19france/issues) and [pull requests](https://github.com/Covid19R/covid19france/pulls) with any package improvements!
+
+Please note that the 'covid19france' project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
