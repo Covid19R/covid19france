@@ -80,26 +80,62 @@ clean_data <- function() {
     )
 }
 
+average_data <- function(tbl) {
+  tbl %>%
+    group_by(
+      date,
+      region_name,
+      region_code
+    ) %>%
+    summarise_if(
+      is.numeric,
+      mean, na.rm = TRUE
+    ) %>%
+    ungroup()
+}
+
 save_country <- function(tbl) {
-  france_country <-
+  france_country_all_sources <-
     tbl %>%
     filter(region_type == "pays") %>%
     select(-region_type)
 
   write_csv(
+    france_country_all_sources,
+    create_path(type = "clean", suffix = "country_all_sources")
+  )
+
+  france_country <-
+    france_country_all_sources %>%
+    average_data()
+
+  write_csv(
     france_country,
     create_path(type = "clean", suffix = "country")
   )
+
+  usethis::use_data(france_country)
 }
 
 save_regional <- function(tbl) {
-  france_regional <-
+  france_regional_all_sources <-
     tbl %>%
     filter(region_type == "departement") %>%
     select(-region_type)
 
   write_csv(
+    france_regional_all_sources,
+    create_path(type = "clean", suffix = "regional_all_sources")
+  )
+
+  france_regional <-
+    france_regional_all_sources %>%
+    average_data()
+
+  write_csv(
     france_regional,
     create_path(type = "clean", suffix = "regional")
   )
+
+  usethis::use_data(france_regional)
 }

@@ -30,9 +30,9 @@ library(covid19france)
 ```
 
 ```{r}
-country
+france_country
 ```
 
 ```{r}
-regional
+france_regional
 ```
