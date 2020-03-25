@@ -1,0 +1,38 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# covid19france
+
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/Covid19R/covid19france.svg?branch=master)](https://travis-ci.org/Covid19R/covid19france)
+<!-- badges: end -->
+
+## Installation
+
+``` r
+# install.packages("devtools")
+devtools::install_github("Covid19R/covid19france")
+```
+## Example
+
+```{r example}
+library(covid19france)
+```
+
+```{r}
+country
+```
+
+```{r}
+regional
+```

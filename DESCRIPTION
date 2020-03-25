@@ -1,11 +1,24 @@
 Package: covid19france
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Cases of COVID-19 in France
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Amanda",
+           family = "Dobbyn",
+           role = c("aut", "cre"),
+           email = "amanda.e.dobbyn@gmail.com")
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Imports:
+    dplyr (>= 0.8.5),
+    fs (>= 1.3.1),
+    glue (>= 1.3.2),
+    here (>= 0.1.11),
+    lubridate (>= 1.7.4),
+    magrittr (>= 1.5),
+    readr,
+    stringr (>= 1.4.0)
 Encoding: UTF-8
 LazyData: true
+Suggests: 
+    testthat
+RoxygenNote: 7.1.0
