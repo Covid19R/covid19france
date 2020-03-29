@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/covid19france)](https://CRAN.R-project.org/package=covid19france)
 <!-- badges: end -->
 
-This package contains summary datasets of COVID-19 cases in France, averaged from the [opencovid19-fr](https://github.com/opencovid19-fr/data) data, available on GitHub. (README in English available [here](https://github.com/opencovid19-fr/data/blob/master/README.en.md).)
+This package for pulling per-day data on COVID-19 cases in France, averaged from the [opencovid19-fr](https://github.com/opencovid19-fr/data) data, available on GitHub. (README in English available [here](https://github.com/opencovid19-fr/data/blob/master/README.en.md).)
 
 ## Installation
 

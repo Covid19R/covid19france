@@ -13,7 +13,6 @@ raw_cols <-
   )
 
 test_that("original cols we care about are still there", {
-
   download_data()
 
   expect_true(download_successful())
@@ -30,7 +29,6 @@ test_that("original cols we care about are still there", {
 
 
 test_that("cleaning and averaging", {
-
   clean <-
     read_data() %>%
     clean_data()

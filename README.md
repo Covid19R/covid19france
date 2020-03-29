@@ -11,7 +11,7 @@ MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/
 status](https://www.r-pkg.org/badges/version/covid19france)](https://CRAN.R-project.org/package=covid19france)
 <!-- badges: end -->
 
-This package contains summary datasets of COVID-19 cases in France,
+This package for pulling per-day data on COVID-19 cases in France,
 averaged from the
 [opencovid19-fr](https://github.com/opencovid19-fr/data) data, available
 on GitHub. (README in English available
@@ -35,20 +35,20 @@ Get the full dataset:
 ``` r
 (france <- refresh_covid19france())
 #> Downloading raw data from https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv.
-#> # A tibble: 18,078 x 7
+#> # A tibble: 17,736 x 7
 #>    date       location location_type location_standa… location_standa… data_type
 #>    <date>     <chr>    <chr>         <chr>            <chr>            <chr>    
-#>  1 2020-03-28 Ain      <NA>          DEP-01           department       confirmed
-#>  2 2020-03-28 Ain      <NA>          DEP-01           department       dead     
-#>  3 2020-03-28 Ain      <NA>          DEP-01           department       icu      
-#>  4 2020-03-28 Ain      <NA>          DEP-01           department       hospital…
-#>  5 2020-03-28 Ain      <NA>          DEP-01           department       recovered
-#>  6 2020-03-28 Ain      <NA>          DEP-01           department       discover…
-#>  7 2020-03-28 Aisne    <NA>          DEP-02           department       confirmed
-#>  8 2020-03-28 Aisne    <NA>          DEP-02           department       dead     
-#>  9 2020-03-28 Aisne    <NA>          DEP-02           department       icu      
-#> 10 2020-03-28 Aisne    <NA>          DEP-02           department       hospital…
-#> # … with 18,068 more rows, and 1 more variable: value <int>
+#>  1 2020-03-28 Ain      county        DEP-01           department       confirmed
+#>  2 2020-03-28 Ain      county        DEP-01           department       dead     
+#>  3 2020-03-28 Ain      county        DEP-01           department       icu      
+#>  4 2020-03-28 Ain      county        DEP-01           department       hospital…
+#>  5 2020-03-28 Ain      county        DEP-01           department       recovered
+#>  6 2020-03-28 Ain      county        DEP-01           department       discover…
+#>  7 2020-03-28 Aisne    county        DEP-02           department       confirmed
+#>  8 2020-03-28 Aisne    county        DEP-02           department       dead     
+#>  9 2020-03-28 Aisne    county        DEP-02           department       icu      
+#> 10 2020-03-28 Aisne    county        DEP-02           department       hospital…
+#> # … with 17,726 more rows, and 1 more variable: value <int>
 ```
 
 To switch to a wider format, you can use `tidyr`:
@@ -61,7 +61,7 @@ france %>%
   dplyr::select(
     1, 6:ncol(.), everything()
   )
-#> # A tibble: 3,013 x 11
+#> # A tibble: 2,956 x 11
 #>    date       confirmed  dead   icu hospitalized recovered discovered location
 #>    <date>         <int> <int> <int>        <int>     <int>      <int> <chr>   
 #>  1 2020-03-28        NA     3    12           53        20         NA Ain     
@@ -74,7 +74,7 @@ france %>%
 #>  8 2020-03-28        NA     0     1            8         4         NA Ariège  
 #>  9 2020-03-28        NA     7    13           64         3         NA Aube    
 #> 10 2020-03-28        NA    17    19           59        34         NA Aude    
-#> # … with 3,003 more rows, and 3 more variables: location_type <chr>,
+#> # … with 2,946 more rows, and 3 more variables: location_type <chr>,
 #> #   location_standardized <chr>, location_standardized_type <chr>
 ```
 

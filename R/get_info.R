@@ -15,10 +15,10 @@ get_info_covid19france <- function() {
     license_url = "https://github.com/opencovid19-fr/data/blob/master/LICENSE",
     data_types =
       refresh_covid19france(verbose = FALSE) %>%
-      tidyr::drop_na(data_type) %>%
-      dplyr::pull(data_type) %>%
-      unique() %>%
-      stringr::str_c(collapse = ", "),
+        tidyr::drop_na(data_type) %>%
+        dplyr::pull(data_type) %>%
+        unique() %>%
+        stringr::str_c(collapse = ", "),
     has_geospatial_info = FALSE
   )
 }

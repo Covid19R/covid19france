@@ -7,8 +7,8 @@ todays_date <- lubridate::today()
 download_dir <- here::here("data-raw")
 
 create_path <- function(dte = todays_date,
-                        type = "raw",
-                        suffix = "") {
+  type = "raw",
+  suffix = "") {
   glue::glue("{download_dir}/{dte}_france_{type}{suffix}.csv")
 }
 
@@ -42,7 +42,7 @@ download_successful <- function(dte = todays_date) {
 read_data <- function() {
   if (!download_successful()) {
     message("Raw download from {url} was not successful.")
-    return(tibble::tibble())
+    return(dplyr::tibble())
   }
 
   raw <- readr::read_csv(
@@ -118,19 +118,16 @@ average_data <- function(tbl) {
 }
 
 enlongen_data <- function(tbl) {
-  tbl %>%
+  tbl %<>%
     dplyr::mutate(
       location_type =
         dplyr::case_when(
           region_type == "departement" ~ "county",
           region_type == "pays" ~ "country",
           region_type == "collectivite-outremer" ~ "overseas collectivity",
-          TRUE ~ NA_character_
+          TRUE ~ region_type
         ),
       location_standardized_type = "department"
-    ) %>%
-    filter(
-      ! location_type == "monde"
     ) %>%
     tidyr::pivot_longer(
       confirmed:discovered,
@@ -146,4 +143,15 @@ enlongen_data <- function(tbl) {
       data_type,
       value
     )
+
+  # Filter out world counts
+  if ("monde" %in% unique(tbl$location_type)) {
+    tbl %<>%
+      dplyr::filter(
+        !location_type == "monde"
+      )
+  }
+
+  tbl %>%
+    dplyr::distinct()
 }
