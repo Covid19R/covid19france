@@ -33,22 +33,29 @@ devtools::install_github("Covid19R/covid19france")
 library(covid19france)
 ```
 
-The two package datasets are available once the package is attached.
+Get the full dataset:
 
 ```{r}
-tibble::as_tibble(france_country)
+(france <- refresh_covid19france())
 ```
+
+To switch to a wider format, you can use `tidyr`:
 
 ```{r}
-tibble::as_tibble(france_regional)
+france %>% 
+  tidyr::pivot_wider(
+    names_from = "data_type"
+  ) %>% 
+  dplyr::select(
+    1, 6:ncol(.), everything()
+  )
 ```
 
-If you want to update the datasets, run `refresh`.
+For more info on the dataset:
 
-```{r, warning=FALSE}
-refresh()
+```{r}
+get_info_covid19france()
 ```
-
 
 ## Contributing
 

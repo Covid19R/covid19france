@@ -14,12 +14,12 @@ create_path <- function(dte = todays_date,
 
 download_path <- create_path()
 
-download_data <- function(verbose = FALSE) {
+download_data <- function() {
   if (!fs::dir_exists(download_dir)) {
     fs::dir_create(download_dir)
   }
 
-  download.file(url, download_path, quiet = !verbose)
+  download.file(url, download_path, quiet = TRUE)
 }
 
 extract_dates <- function(vec) {
@@ -116,48 +116,29 @@ average_data <- function(tbl) {
     )
 }
 
-save_country <- function(tbl) {
-  france_country_all_sources <-
-    tbl %>%
-    dplyr::filter(region_type == "pays") %>%
-    dplyr::select(-region_type)
-
-  readr::write_csv(
-    france_country_all_sources,
-    create_path(type = "clean", suffix = "_country_all_sources")
-  )
-
-  france_country <-
-    france_country_all_sources %>%
-    average_data()
-
-  readr::write_csv(
-    france_country,
-    create_path(type = "clean", suffix = "_country")
-  )
-
-  usethis::use_data(france_country, overwrite = TRUE)
-}
-
-save_regional <- function(tbl) {
-  france_regional_all_sources <-
-    tbl %>%
-    dplyr::filter(region_type == "departement") %>%
-    dplyr::select(-region_type)
-
-  readr::write_csv(
-    france_regional_all_sources,
-    create_path(type = "clean", suffix = "_regional_all_sources")
-  )
-
-  france_regional <-
-    france_regional_all_sources %>%
-    average_data()
-
-  readr::write_csv(
-    france_regional,
-    create_path(type = "clean", suffix = "_regional")
-  )
-
-  usethis::use_data(france_regional, overwrite = TRUE)
+enlongen_data <- function(tbl) {
+  tbl %>%
+    dplyr::mutate(
+      location_type =
+        dplyr::case_when(
+          region_name == "departement" ~ "county",
+          region_name == "pays" ~ "country",
+          TRUE ~ NA_character_
+        ),
+      location_standardized_type = "department"
+    ) %>%
+    tidyr::pivot_longer(
+      confirmed:discovered,
+      names_to = "data_type",
+      values_to = "value"
+    ) %>%
+    dplyr::select(
+      date,
+      location = region_name,
+      location_type,
+      location_standardized = region_code,
+      location_standardized_type,
+      data_type,
+      value
+    )
 }

@@ -1,23 +1,20 @@
-#' Refresh raw and cleaned data
+#' Refresh data
 #'
 #' @param verbose Should messages about what's going on be displayed?
 #'
-#' @return Update the raw and cleaned country and regional CSVs of data in \code{data-raw}.
+#' @return Get the most up to do date per-day data
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' refresh()
+#' refresh_covid19france()
 #' }
-refresh <- function(verbose = TRUE) {
-  message(glue::glue("Downloading raw data from {url}."))
-  download_data(verbose = FALSE)
+refresh_covid19france <- function(verbose = TRUE) {
+  if (verbose) message(glue::glue("Downloading raw data from {url}."))
+  download_data()
 
-  clean <-
-    read_data() %>%
-    clean_data()
-
-  message("Saving clean data.")
-  save_country(clean)
-  save_regional(clean)
+  read_data() %>%
+    clean_data() %>%
+    average_data() %>%
+    enlongen_data()
 }
