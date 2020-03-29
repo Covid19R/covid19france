@@ -103,7 +103,8 @@ average_data <- function(tbl) {
     dplyr::group_by(
       date,
       region_name,
-      region_code
+      region_code,
+      region_type
     ) %>%
     dplyr::summarise_if(
       is.numeric,
@@ -121,11 +122,15 @@ enlongen_data <- function(tbl) {
     dplyr::mutate(
       location_type =
         dplyr::case_when(
-          region_name == "departement" ~ "county",
-          region_name == "pays" ~ "country",
+          region_type == "departement" ~ "county",
+          region_type == "pays" ~ "country",
+          region_type == "collectivite-outremer" ~ "overseas collectivity",
           TRUE ~ NA_character_
         ),
       location_standardized_type = "department"
+    ) %>%
+    filter(
+      ! location_type == "monde"
     ) %>%
     tidyr::pivot_longer(
       confirmed:discovered,
