@@ -22,10 +22,10 @@ test_that("original cols we care about are still there", {
     download_path
   )
 
-  expect_true(
-    raw_cols %in% names(raw)
+  expect_length(
+    setdiff(raw_cols, names(raw)),
+    0L
   )
-
 })
 
 
