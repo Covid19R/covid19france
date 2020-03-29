@@ -9,13 +9,10 @@ raw_cols <-
     "reanimation",
     "hospitalises",
     "gueris",
-    "depistes",
-    "source_nom",
-    "source_url",
-    "source_type"
+    "depistes"
   )
 
-test_that("original cols remain the same", {
+test_that("original cols we care about are still there", {
 
   download_data()
 
@@ -25,7 +22,10 @@ test_that("original cols remain the same", {
     download_path
   )
 
-  expect_named(raw, raw_cols)
+  expect_true(
+    raw_cols %in% names(raw)
+  )
+
 })
 
 
