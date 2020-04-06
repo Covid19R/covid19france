@@ -16,7 +16,7 @@ Get the most up to do date per-day data
 Refresh data
 }
 \examples{
-\dontrun{
+\donttest{
 refresh_covid19france()
 }
 }

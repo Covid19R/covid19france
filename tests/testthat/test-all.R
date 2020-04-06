@@ -13,12 +13,8 @@ raw_cols <-
   )
 
 test_that("original cols we care about are still there", {
-  download_data()
-
-  expect_true(download_successful())
-
   raw <- readr::read_csv(
-    download_path
+    url
   )
 
   expect_length(

@@ -2,26 +2,6 @@
 
 url <- "https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv"
 
-todays_date <- lubridate::today()
-
-download_dir <- here::here("data-raw")
-
-create_path <- function(dte = todays_date,
-                        type = "raw",
-                        suffix = "") {
-  glue::glue("{download_dir}/{dte}_france_{type}{suffix}.csv")
-}
-
-download_path <- create_path()
-
-download_data <- function() {
-  if (!fs::dir_exists(download_dir)) {
-    fs::dir_create(download_dir)
-  }
-
-  download.file(url, download_path, quiet = TRUE)
-}
-
 extract_dates <- function(vec) {
   vec %>%
     stringr::str_remove(".*/") %>%
@@ -29,24 +9,9 @@ extract_dates <- function(vec) {
     lubridate::ymd()
 }
 
-download_successful <- function(dte = todays_date) {
-  fls <- fs::dir_ls(download_dir)
-
-  existing_dates <-
-    fls %>%
-    extract_dates()
-
-  if (todays_date %in% existing_dates) TRUE else FALSE
-}
-
 read_data <- function() {
-  if (!download_successful()) {
-    message("Raw download from {url} was not successful.")
-    return(dplyr::tibble())
-  }
-
-  raw <- readr::read_csv(
-    download_path,
+  readr::read_csv(
+    url,
     col_types =
       readr::cols(
         date = readr::col_date(format = ""),

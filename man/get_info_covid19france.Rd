@@ -13,5 +13,7 @@ A tibble with information about where the data is pulled from, details about the
 Get info about this dataset
 }
 \examples{
+\donttest{
 get_info_covid19france()
+}
 }

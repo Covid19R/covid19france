@@ -11,7 +11,6 @@
 #' }
 refresh_covid19france <- function(verbose = TRUE) {
   if (verbose) message(glue::glue("Downloading raw data from {url}."))
-  download_data()
 
   read_data() %>%
     clean_data() %>%
