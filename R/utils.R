@@ -2,13 +2,6 @@
 
 url <- "https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv"
 
-extract_dates <- function(vec) {
-  vec %>%
-    stringr::str_remove(".*/") %>%
-    stringr::str_remove_all("[^0-9]") %>%
-    lubridate::ymd()
-}
-
 read_data <- function() {
   readr::read_csv(
     url,
