@@ -7,8 +7,8 @@ todays_date <- lubridate::today()
 download_dir <- here::here("data-raw")
 
 create_path <- function(dte = todays_date,
-  type = "raw",
-  suffix = "") {
+                        type = "raw",
+                        suffix = "") {
   glue::glue("{download_dir}/{dte}_france_{type}{suffix}.csv")
 }
 

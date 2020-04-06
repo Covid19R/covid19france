@@ -7,7 +7,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  warning = FALSE
 )
 ```
 
@@ -19,7 +20,9 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/covid19france)](https://CRAN.R-project.org/package=covid19france)
 <!-- badges: end -->
 
-This package for pulling per-day data on COVID-19 cases in France, averaged from the [opencovid19-fr](https://github.com/opencovid19-fr/data) data, available on GitHub. (README in English available [here](https://github.com/opencovid19-fr/data/blob/master/README.en.md).)
+This package provides per-day data on COVID-19 cases in France.
+
+The data is an average over all of the sources provided by [opencovid19-fr](https://github.com/opencovid19-fr/data). (README in English available [here](https://github.com/opencovid19-fr/data/blob/master/README.en.md).)
 
 ## Installation
 
