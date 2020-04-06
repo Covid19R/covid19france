@@ -4,8 +4,13 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' get_info_covid19france()
+#' }
 get_info_covid19france <- function() {
+  latest_data <-
+    refresh_covid19france(verbose = FALSE)
+
   dplyr::tibble(
     data_set_name = "covid19france",
     package_name = "covid19france",
@@ -14,11 +19,18 @@ get_info_covid19france <- function() {
     data_url = "https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv",
     license_url = "https://github.com/opencovid19-fr/data/blob/master/LICENSE",
     data_types =
-      refresh_covid19france(verbose = FALSE) %>%
+      latest_data %>%
         tidyr::drop_na(data_type) %>%
         dplyr::pull(data_type) %>%
         unique() %>%
         stringr::str_c(collapse = ", "),
+    location_types =
+      latest_data %>%
+        tidyr::drop_na(location_type) %>%
+        dplyr::pull(location_type) %>%
+        unique() %>%
+        stringr::str_c(collapse = ", "),
+    spatial_extent = "country",
     has_geospatial_info = FALSE
   )
 }

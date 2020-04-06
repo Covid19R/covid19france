@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' refresh_covid19france()
 #' }
 refresh_covid19france <- function(verbose = TRUE) {
