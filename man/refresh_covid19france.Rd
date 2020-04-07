@@ -10,13 +10,11 @@ refresh_covid19france(verbose = TRUE)
 \item{verbose}{Should messages about what's going on be displayed?}
 }
 \value{
-Get the most up to do date per-day data
+A tibble of the most up to date per-day data on cases of COVID-19 in France, ordered by date descending.
 }
 \description{
 Refresh data
 }
 \examples{
-\donttest{
 refresh_covid19france()
-}
 }

@@ -8,3 +8,8 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
+
+## Other
+* Typo fixed: 'up to do date' --> 'up to date'
+* License updated
+* Examples no longer wrapped in \donttest{}
