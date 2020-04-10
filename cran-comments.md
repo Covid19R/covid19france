@@ -12,4 +12,3 @@
 ## Other
 * Typo fixed: 'up to do date' --> 'up to date'
 * License updated
-* Examples no longer wrapped in \donttest{}

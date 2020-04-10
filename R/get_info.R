@@ -4,7 +4,9 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' get_info_covid19france()
+#' }
 get_info_covid19france <- function() {
   latest_data <-
     refresh_covid19france(verbose = FALSE)
