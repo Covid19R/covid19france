@@ -16,5 +16,7 @@ A tibble of the most up to date per-day data on cases of COVID-19 in France, ord
 Refresh data
 }
 \examples{
+\donttest{
 refresh_covid19france()
+}
 }

@@ -26,6 +26,14 @@ The data is an average over all of the sources provided by [opencovid19-fr](http
 
 ## Installation
 
+From CRAN:
+
+``` r
+install.packages("covid19france")
+```
+
+or the development version:
+
 ``` r
 # install.packages("devtools")
 devtools::install_github("Covid19R/covid19france")

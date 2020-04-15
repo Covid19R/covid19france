@@ -3,24 +3,26 @@
 url <- "https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv"
 
 read_data <- function() {
-  readr::read_csv(
-    url,
-    col_types =
-      readr::cols(
-        date = readr::col_date(format = ""),
-        granularite = readr::col_character(),
-        maille_code = readr::col_character(),
-        maille_nom = readr::col_character(),
-        cas_confirmes = readr::col_integer(),
-        deces = readr::col_integer(),
-        reanimation = readr::col_integer(),
-        hospitalises = readr::col_integer(),
-        gueris = readr::col_integer(),
-        depistes = readr::col_integer(),
-        source_nom = readr::col_character(),
-        source_url = readr::col_character(),
-        source_type = readr::col_character()
-      )
+  suppressWarnings(
+    readr::read_csv(
+      url,
+      col_types =
+        readr::cols(
+          date = readr::col_date(format = ""),
+          granularite = readr::col_character(),
+          maille_code = readr::col_character(),
+          maille_nom = readr::col_character(),
+          cas_confirmes = readr::col_integer(),
+          deces = readr::col_integer(),
+          reanimation = readr::col_integer(),
+          hospitalises = readr::col_integer(),
+          gueris = readr::col_integer(),
+          depistes = readr::col_integer(),
+          source_nom = readr::col_character(),
+          source_url = readr::col_character(),
+          source_type = readr::col_character()
+        )
+    )
   )
 }
 
@@ -85,7 +87,7 @@ enlongen_data <- function(tbl) {
           region_type == "collectivite-outremer" ~ "overseas collectivity",
           TRUE ~ region_type
         ),
-      location_standardized_type = "department"
+      location_code_type = "department"
     ) %>%
     tidyr::pivot_longer(
       confirmed:discovered,
@@ -96,8 +98,8 @@ enlongen_data <- function(tbl) {
       date,
       location = region_name,
       location_type,
-      location_standardized = region_code,
-      location_standardized_type,
+      location_code = region_code,
+      location_code_type,
       data_type,
       value
     )
